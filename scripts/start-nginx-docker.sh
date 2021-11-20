@@ -2,6 +2,7 @@
 # 创建好目录
 mkdir -p /root/applications/nginx/conf/conf.d
 mkdir -p /root/applications/nginx/logs
+mkdir -p /root/applications/nginx/html
 mkdir -p /root/applications/nginx/socket
 mkdir -p /root/scripts/docker-compose
 # 创建docker-compose文件
@@ -23,6 +24,7 @@ services:
             # 映射主机./conf.d目录到容器/etc/nginx/conf.d目录
             - "/root/applications/nginx/conf/conf.d/:/etc/nginx/conf.d/"
             - "/root/applications/nginx/conf/nginx.conf:/etc/nginx/nginx.conf"
+            - "/root/applications/nginx/html/:/usr/share/nginx/html/"
             - "/root/applications/nginx/logs/:/var/log/nginx/"
             - "/root/applications/nginx/socket/:/usr/share/socket"
 EOF

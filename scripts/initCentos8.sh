@@ -1,9 +1,11 @@
 #!bin/bash
+# 更换国内yum源
 yum clean all
 mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo
 yum makecache
 yum -y update
+# 安装docker
 yum remove docker
 yum remove docker-common
 curl -o /etc/yum.repos.d/docker-ce.repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
@@ -16,7 +18,7 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 EOF
 systemctl start docker
 systemctl enable docker
-https://github.com/docker/compose/releases
+# 安装docker-compose
 sudo curl -L https://download.fastgit.org/docker/compose/releases/download/v2.1.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 curl -L https://raw.githubusercontent.com/docker/compose/v2.1.1/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose

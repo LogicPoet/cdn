@@ -64,3 +64,9 @@ http {
 EOF
 # 启动容器 -p nginx 指定启动标识-docker-compose的标识
 docker-compose -f /root/scripts/docker-compose/nginx.yml -p nginx up -d
+# 添加重启脚本
+tee /root/scripts/docker-compose/restart-nginx.sh <<-'EOF'
+#!bin/bash
+docker-compose -f /root/scripts/docker-compose/nginx.yml -p nginx down
+docker-compose -f /root/scripts/docker-compose/nginx.yml -p nginx up -d
+EOF

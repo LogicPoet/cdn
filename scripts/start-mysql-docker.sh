@@ -73,3 +73,9 @@ init_connect='SET NAMES utf8mb4'
 EOF
 # 启动容器 -p mysql 指定启动标识-docker-compose的标识
 docker-compose -f /root/scripts/docker-compose/mysql.yml -p mysql up -d
+# 添加重启脚本
+tee /root/scripts/docker-compose/restart-mysql.sh <<-'EOF'
+#!bin/bash
+docker-compose -f /root/scripts/docker-compose/mysql.yml -p mysql down
+docker-compose -f /root/scripts/docker-compose/mysql.yml -p mysql up -d
+EOF

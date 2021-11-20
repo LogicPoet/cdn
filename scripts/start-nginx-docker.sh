@@ -62,5 +62,5 @@ http {
     include /etc/nginx/conf.d/*.conf;
 }
 EOF
-# 启动容器
-docker-compose -f /root/scripts/docker-compose/nginx.yml up -d
+# 启动容器 -p nginx 指定启动标识-docker-compose的标识
+docker-compose -f /root/scripts/docker-compose/nginx.yml -p nginx up -d

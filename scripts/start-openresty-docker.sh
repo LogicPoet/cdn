@@ -145,12 +145,13 @@ server {
             local body = json.decode(data)
             if body then
                 local repo_name_tag = body["repository"]["repo_name"]..":"..body["push_data"]["tag"]
+                local container_name = body["repository"]["namespace"].."-"..body["repository"]["name"]
                 ngx.log(ngx.INFO, "repo_name_tag:", repo_name_tag)
-                local ret1 = os.execute("docker pull "..repo_name_tag)
+                local ret_pull = os.execute("docker pull "..repo_name_tag)
                 ngx.log(ngx.INFO, "pull_result:", ret)
-                os.execute("docker stop "..repo_name_tag)
-                os.execute("docker rm "..repo_name_tag)
-                local ret2 = os.execute("docker run "..repo_name_tag)
+                local ret_stop = os.execute("docker stop "..container_name)
+                local ret_rm = os.execute("docker rm "..container_name)
+                local ret_run = os.execute("docker run --name "..container_name.." "..repo_name_tag)
             end
         }
     }
